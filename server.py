@@ -3,7 +3,7 @@
 from random import sample
 from json import dumps
 from datetime import datetime
-from secrets import ALPHABET, AUTH_TOKEN, ACCOUNT_SID
+from secrets import ALPHABET, AUTH_TOKEN, ACCOUNT_SID, MY_PHONE_NUMBER, MY_TWILIO_PHONE
 from twilio.rest import Client
 
 class Messages(object):
@@ -14,6 +14,8 @@ class Messages(object):
 		self.alphabet = ALPHABET # codificacao de alfabeto a criterio do desenvolvedor
 		self.AUTH_TOKEN = AUTH_TOKEN
 		self.ACCOUNT_SID = ACCOUNT_SID
+		self.MY_PHONE_NUMBER = MY_PHONE_NUMBER
+		self.MY_TWILIO_PHONE = MY_TWILIO_PHONE
 
 	def connect_twilio(self, body):
 
@@ -21,8 +23,8 @@ class Messages(object):
 
 		message = client.messages.create(
 			body = body,
-			from_ = '+19706709482',
-			to = '+5598988129741'
+			from_ = self.MY_TWILIO_PHONE,
+			to = self.MY_PHONE_NUMBER
 		)
 
 		return message.sid
